@@ -5,6 +5,8 @@
  * 1. Introduction to Java helpful.
  */
 
+import java.util.ArrayList;
+
 public abstract class Bag {
     /*
      * TODO: Create the following private instance variables
@@ -13,6 +15,10 @@ public abstract class Bag {
      *       - an int named capacity
      *       - an array of Strings named contents
      */
+    private String color;
+    private int numberOfContents;
+    private int capacity;
+    private ArrayList<String> contents = new ArrayList<String>();
 
 
 
@@ -27,6 +33,16 @@ public abstract class Bag {
      * its contents.)
      */
 
+    /**
+     * Creates a new Bag with the given color and capacity.
+     * @param color the color of the Bag
+     * @param capacity the capacity of the Bag
+     */
+    public Bag(String color, int capacity) {
+        this.color = color;
+        this.capacity = capacity;
+    }
+
 
 
 
@@ -38,6 +54,30 @@ public abstract class Bag {
      *           - getCapacity
      */
 
+    /**
+     * Returns the color of this Bag.
+     * @return the color of this Bag
+     */
+    public String getColor() {
+        return this.color;
+    }
+
+    /**
+     * Returns the number of contents of this Bag.
+     * @return the number of contents.
+     */
+    public int getNumberOfContents() {
+        return this.numberOfContents;
+    }
+
+    /**
+     * Returns the capacity of this Bag.
+     * @return the capacity of this Bag
+     */
+    public int getCapacity() {
+        return this.capacity;
+    }
+
 
 
 
@@ -45,6 +85,14 @@ public abstract class Bag {
      * TODO: Create a setter function called setColor which sets the
      *       color of this bag to the given color.
      */
+
+    /**
+     * Sets a new color to this bag.
+     * @param color the color that this Bag is to be set to
+     */
+    public void setColor(String color) {
+        this.color = color;
+    }
 
 
 
@@ -61,6 +109,22 @@ public abstract class Bag {
      *       and false otherwise.
      */
 
+    /**
+     * Adds an item to this bag.
+     * @param item the item that is to be added
+     * @return whether item could be successfully added
+     */
+    public boolean addItem(String item) {
+        if (numberOfContents < capacity) {
+            contents.add(item);
+            numberOfContents++;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
 
 
 
@@ -73,8 +137,19 @@ public abstract class Bag {
      *
      * If there are no items in this Bag, return null.
      *
-     * @return
+     * @return popped item, or null if Bag is empty
      */
+    public String popItem() {
+        if (numberOfContents != 0) {
+            String item = contents.get(contents.size() - 1);
+            contents.remove(contents.size() - 1);
+            numberOfContents--;
+            return item;
+        }
+        else {
+            return null;
+        }
+    }
 
 
 
@@ -87,6 +162,7 @@ public abstract class Bag {
      */
     public void increaseCapacity(int n) {
         // TODO: Implement this method.
+        this.capacity += n;
 
     }
 
@@ -95,7 +171,7 @@ public abstract class Bag {
      * This method requires you to have created the private
      * instance variables mentioned above.
      *
-     * @return
+     * @return the details of this Bag
      */
     @Override
     public String toString() {
